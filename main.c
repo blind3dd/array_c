@@ -6,12 +6,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define SIZEOF(a) sizeof(*a) / sizeof(a[0]);
+
 int getArrayInputCount(void);
 int allocateArrayMemory(int count);
 void getArrayInputValues(int count, int* array);
 void printArray(int* array, int count);
-void printSizeOfParameter(int array[]);
-void printLengthOf(int array[]);
+void printSizeOfArrayParameter(int array[]);
+void printLengthOfArrayParameter(size_t arraySize);
 
 int main(int argc, char* argv[])
 {
@@ -24,8 +26,8 @@ int main(int argc, char* argv[])
 
     printf("sizeof of array: %d\n", arraySize);
     printf("length of array: %d\n", count);	// arraySize / intsize
-    printSizeOfParameter(array);
-    printLengthOf(array);
+    printSizeOfArrayParameter(array);
+    printLengthOfArrayParameter(arraySize);
     printf("first element of array: %d\n", array[0]);
     printf("last lement of array: %d\n", array[count - 1]);
 
@@ -78,12 +80,12 @@ void printArray(int* array, int count)
     printf("]\n");
 }
 
-void printSizeOfParameter(int array[])
+void printSizeOfArrayParameter(int array[])
 {
-    printf("sizeof of param: %d\n", (int)sizeof(array));
+    printf("sizeof of a single array element: %d\n", (int)sizeof(array));
 }
 
-void printLengthOf(int array[])
+void printLengthOfArrayParameter(size_t arraySize)
 {
-    printf("length of param: %d\n", (int)(sizeof(array) / sizeof(array[0])));	// 8/4
+    printf("number of array elements: %d\n", arraySize / sizeof(int));	// size / size int
 }
